@@ -1,0 +1,73 @@
+/* ═════════ 07 WHY — four reasons, read one at a time ═════════
+   Method → Why → Voices. Starts on --s-c (where Method ends), ends on --s-b (where Voices begins).
+   Selection is visitor-only; nothing here reads scroll. Motion is 300–600ms opacity/translate/line-draw. */
+.hx-sec.hx-why[data-tone="flow"] { --section-y: clamp(3.5rem, 2rem + 4vw, 5.5rem); }
+.hx-why { --bg: linear-gradient(180deg, var(--s-c) 0%, var(--s-b) 100%); padding-bottom: 0; }
+.hx-why .hx-slabel { margin-bottom: clamp(2rem, 4vw, 3rem); }
+.hx-why__grid { display: grid; gap: clamp(1.75rem, 5vw, 2.5rem); }
+
+/* ── Statement ── */
+.hx-why__lead { display: grid; gap: clamp(1rem, 2vw, 1.4rem); align-content: start; }
+.hx-why__title { margin: 0; font-size: clamp(2.1rem, 1.35rem + 3vw, 3.75rem); font-weight: 300; letter-spacing: -0.04em; line-height: 1.04; color: var(--fg); }
+.hx-why__title .line { padding-bottom: 0.12em; margin-bottom: -0.12em; }
+.hx-why__title .line:last-child .line__in { color: var(--acc); }
+.hx-why__copy { margin: 0; max-width: 34ch; font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); font-weight: 300; line-height: 1.6; color: var(--fg-dim); }
+
+/* ── Anchor: strata (desktop / tablet only; the list's own rules carry mobile) ── */
+.hx-why__strata { display: none; }
+.hx-why__strata svg { display: block; width: 100%; max-width: 18.75rem; height: auto; overflow: visible; }
+.hx-ws__datum { stroke: var(--hair-strong); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.hx-ws__line, .hx-ws__tick { stroke: var(--hair-strong); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.hx-ws__row[data-on] :is(.hx-ws__line, .hx-ws__tick) { stroke: var(--acc); }
+.hx-why__fig { margin-top: 1rem; color: var(--fg-dim); }
+.hx-why__fig span { color: var(--acc); }
+
+/* ── Index ── */
+.hx-why__tabs { display: grid; border-bottom: 1px solid var(--hair); }
+.hx-wt { position: relative; display: grid; grid-template-columns: 2.75rem minmax(0, 1fr); align-items: baseline; min-height: 3.5rem; padding: 1rem 0; border: 0; border-top: 1px solid var(--hair); background: none; text-align: left; cursor: pointer; color: var(--fg-dim); font: inherit; }
+.hx-wt::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: linear-gradient(90deg, var(--acc), rgb(57 200 255 / 0)); transform: scaleX(0); transform-origin: left; }
+.hx-wt[aria-selected="true"]::before { transform: scaleX(1); }
+.hx-wt__n { color: inherit; }
+.hx-wt__t { font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem); font-weight: 300; letter-spacing: -0.025em; line-height: 1.2; text-wrap: balance; }
+.hx-wt[aria-selected="true"] { color: var(--fg); }
+.hx-wt[aria-selected="true"] .hx-wt__n { color: var(--acc); }
+.hx-wt:hover { color: var(--fg); }
+.hx-wt:focus-visible, .hx-wp:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
+
+/* ── Selected detail: panels share one cell, so height never changes ── */
+.hx-why__panels { display: grid; margin-top: clamp(1.25rem, 3vw, 1.75rem); padding-left: 2.75rem; }
+.hx-wp { grid-area: 1 / 1; margin: 0; max-width: 40ch; font-size: clamp(1rem, 0.95rem + 0.3vw, 1.1875rem); font-weight: 300; line-height: 1.6; color: var(--fg-soft); text-wrap: pretty; }
+.hx-wp[data-state="off"] { visibility: hidden; opacity: 0; }
+
+/* ── Hand-off to Voices ── */
+.hx-why__close { position: relative; display: grid; justify-items: start; padding-block: clamp(2rem, 4vw, 2.75rem) clamp(4rem, 6vw, 5rem); }
+.hx-why__dir { display: flex; align-items: center; gap: 0.9em; }
+.hx-why__dir::after { content: ""; width: clamp(2rem, 8vw, 5rem); height: 1px; background: linear-gradient(90deg, rgb(57 200 255 / 0.5), transparent); }
+.hx-why__tail { position: absolute; z-index: 2; left: 50%; bottom: 0; width: 1px; height: clamp(2.5rem, 5vw, 4rem); translate: -0.5px 0; pointer-events: none; background: linear-gradient(180deg, transparent, rgb(57 200 255 / 0.5)); }
+
+/* ── Motion: interaction feedback only ── */
+@media (prefers-reduced-motion: no-preference) {
+  .hx-wt { transition: color 0.4s var(--m-soft), opacity var(--dur-normal) var(--ease-out) var(--d, 0s), transform var(--dur-normal) var(--ease-out) var(--d, 0s); }
+  .hx-wt::before { transition: transform 0.6s var(--m-major); }
+  .hx-wt__t { transition: translate 0.5s var(--m-major); }
+  .hx-wp { translate: 0 0.5rem; transition: opacity 0.3s var(--m-soft), translate 0.3s var(--m-soft), visibility 0s linear 0.3s; }
+  .hx-wp[data-state="on"] { translate: 0 0; transition: opacity 0.45s var(--m-soft) 0.12s, translate 0.55s var(--m-major) 0.12s, visibility 0s; }
+  .hx-ws__line, .hx-ws__tick { transition: stroke 0.4s var(--m-soft); }
+}
+
+@media (min-width: 640px) and (prefers-reduced-motion: no-preference) {
+  .hx-wt[aria-selected="true"] .hx-wt__t { translate: 0.4rem 0; }
+}
+
+/* ── Desktop & tablet landscape: asymmetric 5 / 6, compact ── */
+@media (min-width: 1024px) {
+  .hx-why__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: 0; align-items: start; }
+  .hx-why__lead { grid-column: 1 / span 5; grid-row: 1; }
+  .hx-why__strata { display: block; grid-column: 1 / span 5; grid-row: 2; align-self: end; margin-top: clamp(2rem, 4vw, 3rem); }
+  .hx-why__proof { grid-column: 7 / span 6; grid-row: 1 / span 2; }
+  .hx-wt { padding-block: 1.25rem; }
+  .hx-why__panels { margin-top: 1.75rem; }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .hx-why__lead { max-width: 34rem; }
+}

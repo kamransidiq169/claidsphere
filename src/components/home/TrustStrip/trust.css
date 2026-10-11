@@ -1,0 +1,132 @@
+/* ═════════ TRUST — the technology system, between Hero and Intro ═════════
+   Scoped to .hx-trust. Same tokens, Geist 300, mono labels and cyan node as Hero and Intro.
+   Structure:  index bar → statement (left third) | architecture on a spine (right two-thirds)
+   Alignment:  the spine IS the page's one-third rule, so the section hands off to the Intro stage on the same line.
+   Tiers:      Ecosystem → Platform → Build → Proof. Motion: bar → statement → spine draws → tiers resolve → proof last. */
+.hx-sec.hx-trust[data-tone="royal"] {
+  --hero-white: #eef5f8; --hero-muted: #8593a0; --hero-soft: #c3d1da; --hero-cyan: #39c8ff;
+  --fg: var(--hero-white); --fg-dim: var(--hero-muted);
+  --t-line: rgb(255 255 255 / 0.1);
+  --gl: rgb(255 255 255 / 0.035);
+  --tr-pad: clamp(1.25rem, 2.4vw, 2.25rem);
+  --bg: radial-gradient(50rem 12rem at 50% 0%, rgb(10 70 150 / 0.2), transparent 75%), radial-gradient(46rem 22rem at 70% 55%, rgb(20 120 255 / 0.07), transparent 70%), linear-gradient(180deg, #03090d 0%, #040c11 40%, #040c11 100%);
+  padding-block: clamp(5rem, 8vw, 7.5rem) clamp(3rem, 5vw, 4.5rem);
+  overflow: hidden;
+}
+/* the shared grid verticals run through, but hold off at the top where the bridge arrives */
+.hx-trust::after { -webkit-mask-image: linear-gradient(180deg, transparent, #000 14rem); mask-image: linear-gradient(180deg, transparent, #000 14rem); }
+
+/* ── bridge from the Hero: the orbit's lower arc, a stem and a node ── */
+.hx-trust__bridge { position: absolute; z-index: -1; inset: 0 0 auto 0; height: clamp(5rem, 9vw, 9rem); pointer-events: none; }
+.hx-trust__bridge svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.hx-trust__arc { vector-effect: non-scaling-stroke; stroke: rgb(57 200 255 / 0.28); stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; animation: hxRing 2.6s var(--m-major) 0.2s forwards; animation-play-state: paused; }
+.hx-trust__stem { position: absolute; left: 50%; top: 100%; width: 1px; height: clamp(2rem, 4vw, 3.5rem); background: linear-gradient(180deg, rgb(57 200 255 / 0.5), transparent); }
+.hx-trust__node { position: absolute; left: 50%; top: 100%; width: 5px; height: 5px; translate: -50% -50%; border-radius: 50%; background: var(--hero-cyan); box-shadow: 0 0 8px rgb(57 200 255 / 0.8); }
+.hx-trust:has(.is-in) .hx-trust__arc { animation-play-state: running; }
+
+/* ── index bar ── */
+.hx-tr__bar { display: flex; align-items: center; gap: 1rem; margin-bottom: clamp(2rem, 4.5vw, 3.5rem); }
+.hx-tr__eyebrow { color: var(--hero-cyan); letter-spacing: 0.22em; }
+.hx-tr__bar > span:last-child { color: var(--hero-muted); letter-spacing: 0.22em; white-space: nowrap; }
+.hx-tr__bar b { font-weight: 500; opacity: 0.45; padding-inline: 0.35em; }
+.hx-tr__barrule { flex: 1; height: 1px; background: linear-gradient(90deg, rgb(57 200 255 / 0.45), var(--t-line) 28%); transform-origin: left; }
+
+/* ── statement ── */
+.hx-tr__grid { display: grid; gap: clamp(2.25rem, 6vw, 3.5rem); }
+.hx-tr__title { margin: 0; font-size: clamp(2.35rem, 10.4vw, 4rem); font-weight: 300; letter-spacing: -0.04em; line-height: 1.04; color: var(--hero-white); max-width: none; }
+.hx-tr__title .line { white-space: nowrap; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+.hx-tr__title .line:last-child .line__in { color: var(--hero-cyan); }
+.hx-tr__support { margin: 1.5rem 0 0; max-width: 24rem; font-size: 0.9375rem; font-weight: 300; line-height: 1.7; color: var(--hero-muted); }
+
+/* ── architecture: spine + tiers ── */
+.hx-tr__arch { position: relative; padding-left: var(--tr-pad); }
+.hx-tr__arch::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, rgb(57 200 255 / 0.55), rgb(57 200 255 / 0.2) 70%, var(--t-line)); transform-origin: top; transition: transform 1.8s var(--m-major) 0.1s; }
+
+.hx-tr__tier { position: relative; padding-top: 1.1rem; }
+.hx-tr__tier::before { content: ""; position: absolute; left: calc(var(--tr-pad) * -1); right: 0; top: 0; height: 1px; background: var(--t-line); }
+.hx-tr__tier::after { content: ""; position: absolute; left: calc(var(--tr-pad) * -1); top: 0; width: 5px; height: 5px; translate: -50% -50%; border-radius: 50%; background: var(--hero-cyan); box-shadow: 0 0 8px rgb(57 200 255 / 0.7); transition: opacity 0.8s var(--m-soft) calc(0.35s + var(--t) * 0.3s); }
+.hx-tr__tag { color: var(--hero-muted); letter-spacing: 0.22em; margin: 0 0 0.35rem; transition: opacity 0.9s var(--m-soft) calc(0.3s + var(--t) * 0.3s); }
+
+.hx-tr__items { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); }
+.hx-tr__items li { position: relative; display: grid; grid-template-columns: 2.75rem minmax(0, 1fr); column-gap: 0; align-items: baseline; padding: 0.95rem 0 1.15rem; }
+.hx-tr__n { grid-row: 1; font: 500 0.68rem/1.4 var(--font-mono); letter-spacing: 0.2em; color: var(--hero-muted); transition: color 0.3s var(--m-soft); }
+.hx-tr__name { grid-column: 2; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem); font-weight: 300; letter-spacing: 0.035em; line-height: 1.1; text-transform: uppercase; color: var(--hero-soft); transition: color 0.35s var(--m-soft), translate 0.6s var(--m-major); }
+.hx-tr__note { grid-column: 2; margin-top: 0.4rem; font-size: 0.875rem; line-height: 1.5; color: var(--hero-muted); transition: color 0.35s var(--m-soft); }
+.hx-tr__items li::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: linear-gradient(90deg, var(--hero-cyan), rgb(57 200 255 / 0)); transform: scaleX(0); transform-origin: left; transition: transform 0.9s var(--m-major); }
+.hx-tr__items li + li { border-top: 1px solid var(--t-line); }
+@media (hover: hover) {
+  .hx-tr__items li:hover::before { transform: scaleX(1); }
+  .hx-tr__items li:hover .hx-tr__n { color: var(--hero-cyan); }
+  .hx-tr__items li:hover .hx-tr__name { color: var(--hero-white); translate: 4px 0; }
+  .hx-tr__items li:hover .hx-tr__note { color: var(--hero-soft); }
+}
+
+/* Microsoft anchors the system: one dominant line */
+.hx-tr__tier:first-child .hx-tr__name { font-size: clamp(2.5rem, 1.2rem + 5vw, 5.25rem); letter-spacing: -0.02em; line-height: 1; color: var(--hero-white); }
+.hx-tr__tier:first-child .hx-tr__n { align-self: start; padding-top: 0.5em; }
+.hx-tr__tier:first-child .hx-tr__note { font-size: 0.9375rem; }
+
+/* Proof: the quiet end of the spine — hollow node, small type */
+.hx-tr__proof::after { background: #040c11; box-shadow: none; border: 1px solid rgb(57 200 255 / 0.7); width: 7px; height: 7px; }
+.hx-tr__proofbody { display: grid; gap: 0.7rem 2.5rem; padding: 0.75rem 0 0.25rem; }
+.hx-tr__by { color: var(--hero-muted); letter-spacing: 0.22em; }
+.hx-tr__clients, .hx-tr__ratings { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; }
+.hx-tr__clients { gap: 0.15rem 0; font-size: 1rem; font-weight: 300; color: var(--hero-soft); flex-direction: column; }
+.hx-tr__ratings { gap: 0.4rem 1.5rem; font: 500 0.72rem/1.4 var(--font-mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--hero-muted); }
+.hx-tr__ratings li { display: inline-flex; align-items: center; gap: 0.6rem; }
+.hx-tr__ratings li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--hero-cyan); box-shadow: 0 0 6px rgb(57 200 255 / 0.6); flex: none; }
+
+/* ── tablet: platform runs across three ruled cells, build across two ── */
+@media (min-width: 640px) {
+  .hx-tr__tier[data-n="3"] .hx-tr__items { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .hx-tr__tier[data-n="2"] .hx-tr__items { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hx-tr__items li { grid-template-columns: 1fr; row-gap: 0.55rem; padding: 1.1rem var(--tr-pad) 1.4rem 0; }
+  .hx-tr__items li + li { border-top: 0; }
+  .hx-tr__tier:not([data-n="1"]) .hx-tr__items li + li { border-left: 1px solid var(--t-line); padding-left: var(--tr-pad); }
+  .hx-tr__n, .hx-tr__name, .hx-tr__note { grid-column: 1; grid-row: auto; margin: 0; }
+  .hx-tr__tier:first-child .hx-tr__n { padding-top: 0; }
+  .hx-tr__proofbody { grid-template-columns: auto 1fr auto; align-items: baseline; }
+}
+
+/* ── desktop: statement in the left third, the spine on the one-third rule ── */
+@media (min-width: 1024px) {
+  .hx-tr__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: 0; align-items: start; }
+  .hx-tr__lede { padding-right: var(--tr-pad); }
+  .hx-tr__title { font-size: clamp(2.35rem, 0.6rem + 3.2vw, 4rem); }
+  .hx-tr__arch { padding-left: calc(var(--tr-pad) * 1.5); --tr-pad: clamp(1.5rem, 2.4vw, 2.5rem); }
+  .hx-tr__tier::before, .hx-tr__tier::after { left: calc(var(--tr-pad) * -1.5); }
+  .hx-tr__tier::before { right: 0; }
+  .hx-tr__tier:not(:first-child) { margin-top: 0.25rem; }
+  .hx-tr__tier:first-child .hx-tr__items li { padding-bottom: 1.6rem; }
+}
+
+/* ── motion: the system comes online ── */
+.js .hx-tr__bar:not(.is-in) .hx-tr__barrule { transform: scaleX(0); }
+.js .hx-tr__bar:not(.is-in) > span { opacity: 0; }
+.hx-tr__barrule { transition: transform 1.4s var(--m-major) 0.1s; }
+.hx-tr__bar > span { transition: opacity 0.9s var(--m-soft) 0.15s; }
+
+.hx-tr__title .line__in { transition: transform 1.2s var(--m-major) var(--d, 0s), opacity 0.9s var(--m-soft) var(--d, 0s); }
+.js .hx-tr__title[data-reveal="lines"]:not(.is-in) .line__in { transform: translateY(24%); opacity: 0; }
+
+/* spine draws, tiers hang off it in sequence, proof resolves last */
+.js .hx-tr__arch:not(.is-in)::before { transform: scaleY(0); }
+.js .hx-tr__arch:not(.is-in) .hx-tr__tier::after { opacity: 0; }
+.js .hx-tr__arch:not(.is-in) .hx-tr__tag { opacity: 0; }
+.js .hx-tr__arch:not(.is-in) .hx-tr__tier::before { transform: scaleX(0); }
+.hx-tr__tier::before { transform-origin: left; transition: transform 1.2s var(--m-major) calc(0.3s + var(--t) * 0.3s); }
+.hx-tr__n, .hx-tr__note, .hx-tr__proofbody { transition-property: opacity, translate, color; transition-duration: 0.9s, 1s, 0.35s; transition-timing-function: var(--m-soft), var(--m-major), var(--m-soft); }
+.hx-tr__name { transition: opacity 0.9s var(--m-soft), color 0.35s var(--m-soft), translate 0.6s var(--m-major); }
+.js .hx-tr__arch:not(.is-in) :is(.hx-tr__n, .hx-tr__name, .hx-tr__note, .hx-tr__proofbody) { opacity: 0; translate: 0 10px; }
+.hx-tr__tier :is(.hx-tr__n, .hx-tr__name, .hx-tr__note) { transition-delay: calc(0.5s + var(--t) * 0.3s + var(--i, 0) * 0.08s), 0s, 0s; }
+.hx-tr__proofbody { transition-delay: 1.5s; }
+.hx-tr__proof .hx-tr__tag, .hx-tr__proof::after { transition-delay: 1.3s; }
+.hx-tr__proof::before { transition-delay: 1.2s; }
+.hx-tr__tier .hx-tr__name { transition-delay: calc(0.5s + var(--t) * 0.3s + var(--i, 0) * 0.08s), 0s, 0s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hx-trust__arc { animation: none; stroke-dashoffset: 0; }
+  .hx-trust *, .hx-trust *::before, .hx-trust *::after { transition: none !important; }
+  .js .hx-trust :is(.hx-tr__bar, .hx-tr__arch):not(.is-in) *, .js .hx-tr__arch:not(.is-in) *::before, .js .hx-tr__arch:not(.is-in) *::after { opacity: 1 !important; translate: none !important; transform: none !important; }
+  .js .hx-tr__arch:not(.is-in)::before { transform: none; }
+}

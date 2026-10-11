@@ -1,0 +1,111 @@
+/* ═════════════════════════════════════════════════════════════
+   Claidsphere homepage visual system  (prefix: hx-)
+   Light-first enterprise editorial. Sharp edges, hairlines, large type,
+   a rich blue family used for hierarchy. Motion: ambient → reveal → interaction.
+   Tokens: surfaces (--c-*), theme ink (--fg/--fg-dim/--hair/--acc) per section.
+   ═════════════════════════════════════════════════════════════ */
+
+:root {
+  --maxw: 100rem;
+  /* Surfaces */
+  --c-white: #ffffff;
+  --c-mist: #f2f7fd;
+  --c-sky: #e3eefb;
+  --c-lav: #ecedfb;
+  --c-cyan: #e2f3f7;
+  --c-warm: #faf8f4;
+  --c-royal: #0d2a66;
+  --c-rich: #0b3fae;
+  /* Colour family */
+  --c-navy: #0a1530;
+  --c-azure: #0078d4;
+  --c-indigo: #3a3fd1;
+  --c-teal: #0b8f9c;
+  --c-gold: #8a6414;
+  --c-green: #1d8a69;
+  /* Motion tokens */
+  --m-major: cubic-bezier(0.16, 1, 0.3, 1);
+  --m-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --t-micro: 0.22s;
+  --t-hover: 0.6s;
+  --t-reveal: 1.2s;
+  --t-ambient: 48s;
+  /* Type */
+  --hx-lead: clamp(1.0625rem, 0.9rem + 0.45vw, 1.3125rem);
+  --z-header: 50;
+}
+
+
+/* ───────── Surface tones ─────────
+   One deep-blue family. Every flow section starts on the colour the previous one ends on
+   (--s0/--s1), so seams never read as edges. Hero / Trust / Intro override these locally. */
+:root { --s-intro: #07162a; --s-a: #061220; --s-b: #071a30; --s-c: #050f1b; --s-d: #040c11; --s-e: #02070a; }
+.hx-sec { position: relative; isolation: isolate; padding-block: var(--section-y); color: var(--fg); background: var(--bg, var(--s-d)); }
+.hx-sec[data-theme="dark"] { --fg: #eef5f8; --fg-soft: #c3d1da; --fg-dim: #8593a0; --hair: rgb(255 255 255 / 0.1); --hair-strong: rgb(255 255 255 / 0.2); --acc: #39c8ff; --acc-fill: #39c8ff; --gl: rgb(255 255 255 / 0.035); --sweep: #39c8ff; }
+
+/* Shared grid lines: one set of verticals runs through every section, so the page reads as a single sheet */
+.hx-sec::after { content: ""; position: absolute; inset-block: 0; z-index: -1; pointer-events: none;
+  inset-inline: max(var(--gutter), calc((100% - var(--maxw)) / 2 + var(--gutter)));
+  background:
+    linear-gradient(var(--gl), var(--gl)) 0 0 / 1px 100% no-repeat,
+    linear-gradient(var(--gl), var(--gl)) 100% 0 / 1px 100% no-repeat,
+    linear-gradient(var(--gl), var(--gl)) 33.333% 0 / 1px 100% no-repeat,
+    linear-gradient(var(--gl), var(--gl)) 66.666% 0 / 1px 100% no-repeat; }
+@media (max-width: 767px) { .hx-sec::after { background: linear-gradient(var(--gl), var(--gl)) 0 0 / 1px 100% no-repeat, linear-gradient(var(--gl), var(--gl)) 100% 0 / 1px 100% no-repeat; } }
+
+.hx-wrap { position: relative; z-index: 1; width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+
+/* ───────── Type primitives ───────── */
+.hx-label { max-width: none; font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.4; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; margin: 0; color: var(--fg-dim); }
+.hx-label i { font-style: normal; opacity: 0.45; padding-inline: 0.35em; }
+.hx-h2 { margin: 0; font-size: clamp(2.35rem, 1rem + 4.7vw, 5.75rem); font-weight: 300; letter-spacing: -0.04em; line-height: 1.04; color: var(--fg); max-width: none; }
+.hx-h2 .line { padding-bottom: 0.12em; margin-bottom: -0.12em; }
+.hx-h2 .line:last-child:not(:first-child) .line__in { color: var(--acc); }
+.hx-lead { font-size: var(--hx-lead); font-weight: 300; line-height: 1.65; max-width: 60ch; color: var(--fg-dim); }
+.hx-dim { color: var(--fg-dim); }
+.hx-fine { font-size: 0.78rem; line-height: 1.6; color: var(--fg-dim); max-width: 78ch; margin-top: clamp(2rem, 4vw, 3.5rem); }
+.hx-slabel { display: flex; align-items: center; gap: 1rem; margin-bottom: clamp(1.5rem, 3vw, 2.5rem); }
+.hx-slabel__idx { color: var(--acc); letter-spacing: 0.22em; }
+.hx-slabel__rule { flex: 0 0 3rem; height: 1px; background: linear-gradient(90deg, rgb(57 200 255 / 0.4), var(--hair)); transform-origin: left; transition: transform 1.2s var(--m-major) 0.1s; }
+.hx-slabel > span:last-child:not(.hx-slabel__rule) { color: var(--fg-soft); letter-spacing: 0.22em; }
+.hx-slabel__meta { margin-left: auto; color: var(--fg-dim) !important; }
+.hx-slabel > span:not(.hx-slabel__rule) { transition: opacity 0.9s var(--m-soft) 0.15s; }
+.js .hx-slabel:not(.is-in) .hx-slabel__rule { transform: scaleX(0); }
+.js .hx-slabel:not(.is-in) > span:not(.hx-slabel__rule) { opacity: 0; }
+.hx-figcap { position: absolute; left: 1.25rem; bottom: 1.1rem; right: 1.25rem; display: flex; gap: 1.25rem; color: rgb(255 255 255 / 0.8); z-index: 2; }
+.hx-figcap span:first-child { color: var(--acc); }
+
+/* ───────── Image frame ───────── */
+.hx-img { position: relative; margin: 0; overflow: hidden; background: #0b1733; isolation: isolate; }
+.hx-img__plane { position: absolute; inset: -5% 0; transform: translate3d(0, calc(var(--py, 0) * 4%), 0); will-change: transform; }
+.hx-img__plane > * { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.6s var(--m-major); }
+.hx-hover:hover .hx-img__plane > * { transform: scale(1.04); }
+.hx-img__grade { position: absolute; inset: 0; pointer-events: none; z-index: 1; background: linear-gradient(180deg, rgb(8 10 15 / 0) 40%, rgb(8 10 15 / 0.4) 100%), linear-gradient(100deg, rgb(23 42 130 / 0.28), transparent 55%); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08); }
+[data-reveal="clip"] { transition: clip-path 1.5s var(--m-major); }
+.js [data-reveal="clip"]:not(.is-in) { clip-path: inset(0 0 100% 0); }
+
+/* ───────── Buttons & links ───────── */
+.hx-btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 0.9rem; min-height: 2.875rem; padding: 0 1.35rem 0 1.7rem; border: 1px solid transparent; border-radius: 999px; overflow: hidden; isolation: isolate; font: 500 0.9375rem/1 var(--font-sans); letter-spacing: 0.005em; cursor: pointer; transition: filter 0.3s var(--m-soft), box-shadow 0.4s var(--m-soft), background-color 0.3s, color 0.3s, border-color 0.3s, transform var(--t-micro) var(--m-soft); }
+/* Same two voices as the Hero: a blue primary and a ghost secondary */
+.hx-btn--solid { color: #fff; background: linear-gradient(100deg, #2f8cf5 0%, #1668d9 100%); box-shadow: 0 8px 28px -10px rgb(20 140 255 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.22); }
+.hx-btn--solid:hover { filter: brightness(1.12); box-shadow: 0 10px 36px -8px rgb(57 200 255 / 0.65), inset 0 1px 0 rgb(255 255 255 / 0.3); }
+.hx-btn--line { color: #d3dde4; background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.08); }
+.hx-btn--line:hover { color: #fff; background: rgb(255 255 255 / 0.1); border-color: rgb(255 255 255 / 0.2); }
+.hx-btn__arrow { display: inline-flex; }
+.hx-btn__arrow svg { flex: none; transition: transform 0.5s var(--m-major); }
+.hx-btn:hover .hx-btn__arrow svg { transform: translateX(0.35rem); }
+.hx-btn:active { transform: translateY(1px); }
+.hx-btn:focus-visible, .hx-arrowlink:focus-visible { outline: 2px solid var(--acc-fill); outline-offset: 4px; }
+.hx-btn[aria-disabled="true"], .hx-btn:disabled { opacity: 0.45; pointer-events: none; }
+.hx-btn--lg { min-height: 3.5rem; padding-inline: 2rem 1.6rem; font-size: 1rem; }
+
+.hx-arrowlink { position: relative; display: inline-flex; align-items: center; gap: 0.8rem; min-height: 2.75rem; padding-block: 0.55rem; font: 500 1rem/1.2 var(--font-sans); font-weight: 400; color: var(--fg-soft); transition: color 0.3s var(--m-soft); }
+.hx-arrowlink:hover { color: var(--fg); }
+.hx-arrowlink::before, .hx-arrowlink::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; }
+.hx-arrowlink::before { background: var(--hair-strong); }
+.hx-arrowlink::after { background: linear-gradient(90deg, var(--acc-fill), rgb(57 200 255 / 0.2)); transform: scaleX(0); transform-origin: left; transition: transform 0.6s var(--m-major); }
+.hx-arrowlink:hover::after { transform: scaleX(1); }
+.hx-arrowlink svg { transition: transform 0.5s var(--m-major); flex: none; color: var(--acc); }
+.hx-arrowlink:hover svg { transform: translateX(5px); }
+
+@keyframes hxDrift { to { background-position: 14px 8px; } }

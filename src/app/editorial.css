@@ -1,0 +1,147 @@
+/* ═════════════════════════════════════════════════════════════
+   Editorial layer — Azure → Work → Method → Why → Voices → FAQ → CTA
+   Each section has its own composition; they share the Hero's type, the hairline grid and the cyan accent.
+   Loaded after flow.css, so it refines the shared tokens and owns the sections below.
+   ═════════════════════════════════════════════════════════════ */
+
+:is(.hx-azure, .hx-work, .hx-method, .hx-why, .hx-voices, .hx-faqsec) { --section-y: clamp(4rem, 2.5rem + 5.5vw, 7.5rem); }
+.hx-h2--md { font-size: clamp(2.1rem, 1rem + 3.6vw, 4.5rem); }
+.hx-sec[data-tone="flow"] .hx-head { margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
+
+/* ═════════ 04 AZURE — statement left, architecture as proof right ═════════ */
+.hx-azure { padding-bottom: calc(var(--section-y) * 0.85); }
+.hx-azure__lead { display: grid; gap: 1.25rem; margin-bottom: clamp(1.75rem, 3vw, 2.5rem); }
+.hx-azure__lead .hx-slabel { margin-bottom: 0.5rem; }
+.hx-azure__lead .hx-lead { font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); max-width: 44ch; }
+.hx-fig { order: 0; }
+.hx-stage__points li.hx-stage__cta { padding-top: 1.75rem; }
+@media (min-width: 1024px) {
+  .hx-stage__side { grid-column: 1 / span 5; grid-row: 1; padding-right: clamp(0rem, 2vw, 2rem); }
+  .hx-stage__points { margin-top: 0; }
+  .hx-fig { grid-column: 6 / span 7; margin-top: 3.5rem; }
+}
+@media (min-width: 640px) and (max-width: 1023px) { .hx-stage__points { grid-template-columns: 1fr 1fr; } }
+
+.hx-compare { grid-template-columns: 1fr; gap: 2rem clamp(2rem, 6vw, 6rem); margin-top: clamp(3rem, 6vw, 5rem); padding-top: 1.25rem; border-top: 1px solid var(--hair); }
+.hx-compare__title { grid-column: 1 / -1; margin: 0; color: var(--fg-dim); }
+.hx-compare li { padding: 0.8rem 0; }
+.hx-compare__col--with li { font-size: clamp(1rem, 0.95rem + 0.3vw, 1.1875rem); }
+.hx-compare__col--without li { font-size: 0.9375rem; }
+@media (min-width: 768px) { .hx-compare { grid-template-columns: 1fr 1fr; } }
+.hx-azure .hx-fine { margin-top: clamp(1.5rem, 3vw, 2.25rem); }
+
+
+/* ═════════ 08 VOICES — one client voice at a time, changed only by the visitor ═════════
+   No scroll, timer or autoplay logic: Stage.tsx holds the active index in React state. Voices share one grid cell
+   (height = longest quote); data-state = active | leaving | idle, data-dir = next | prev picks the direction. */
+.hx-voices { --bg: linear-gradient(180deg, var(--s-b) 0%, var(--s-c) 55%, var(--s-d) 100%); padding-block: calc(var(--section-y) * 0.8); }
+.hx-voice { position: relative; --e-out: cubic-bezier(0.4, 0, 1, 1); }
+.hx-voice__top { margin-bottom: clamp(2rem, 5vw, 4rem); }
+.hx-voice__top .hx-slabel { margin-bottom: 0; }
+.hx-voice__stage { outline: none; }
+.hx-voice__stage:focus-visible { outline: 1px solid var(--acc); outline-offset: 1.25rem; }
+.hx-voice__quotes { display: grid; }
+
+.hx-qf { grid-area: 1 / 1; margin: 0; display: grid; gap: 1.25rem; align-content: start; min-width: 0; padding-top: 1.75rem; border-top: 1px solid var(--hair); }
+.hx-qf[data-state="idle"] { visibility: hidden; pointer-events: none; }
+.hx-qf[data-state="leaving"] { pointer-events: none; }
+.hx-qf__idx { display: none; }
+.hx-qf__num { display: block; font: 200 clamp(3.5rem, 2rem + 5vw, 7rem)/0.8 var(--font-sans, inherit); letter-spacing: -0.05em; font-variant-numeric: tabular-nums; color: var(--fg-dim); opacity: 0.55; }
+.hx-qf__body { display: grid; gap: clamp(2rem, 4.5vw, 3.25rem); min-width: 0; }
+.hx-qf blockquote { margin: 0; }
+.hx-qf__q { margin: 0; max-width: 21em; font-size: clamp(1.625rem, 1.05rem + 2.45vw, 3.375rem); font-weight: 300; letter-spacing: -0.03em; line-height: 1.2; color: var(--fg); text-wrap: balance; hanging-punctuation: first; }
+
+/* Attribution lockup: a CLIENT tag over the name, then role / organisation */
+.hx-qf__cap { display: grid; gap: 0.75rem; padding-top: 1.1rem; max-width: 30rem; position: relative; }
+.hx-qf__cap::before { content: ""; position: absolute; left: 0; top: 0; width: 3.5rem; height: 1px; background: var(--acc); }
+.hx-qf__tag { font: 500 0.6875rem/1 var(--font-mono); letter-spacing: 0.22em; text-transform: uppercase; color: var(--acc); }
+.hx-qf__id { display: grid; gap: 0.35rem; font-style: normal; }
+.hx-qf__name { font: 500 0.8125rem/1.4 var(--font-mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg); }
+.hx-qf__meta { display: flex; flex-wrap: wrap; gap: 0.15rem 0.9rem; font-size: 0.9375rem; font-weight: 300; line-height: 1.5; color: var(--fg-dim); }
+.hx-qf__org { color: var(--fg-soft); }
+.hx-qf__org::before { content: "/"; margin-right: 0.9rem; color: var(--acc); opacity: 0.7; }
+
+/* Page-turn: the leaving voice lifts away and fades; the arriving voice is revealed by a clip that opens in the travel direction. */
+@keyframes hx-v-out-next { to { opacity: 0; translate: 0 -14px; } }
+@keyframes hx-v-out-prev { to { opacity: 0; translate: 0 14px; } }
+@keyframes hx-v-in-next { from { opacity: 0; translate: 0 22px; clip-path: inset(0 0 100% 0); } 55% { opacity: 1; } to { opacity: 1; translate: 0 0; clip-path: inset(0 0 -2% 0); } }
+@keyframes hx-v-in-prev { from { opacity: 0; translate: 0 -22px; clip-path: inset(100% 0 0 0); } 55% { opacity: 1; } to { opacity: 1; translate: 0 0; clip-path: inset(-2% 0 0 0); } }
+.hx-voice[data-moved][data-dir="next"] .hx-qf[data-state="leaving"] { animation: hx-v-out-next 0.32s var(--e-out) both; }
+.hx-voice[data-moved][data-dir="prev"] .hx-qf[data-state="leaving"] { animation: hx-v-out-prev 0.32s var(--e-out) both; }
+.hx-voice[data-moved][data-dir="next"] .hx-qf[data-state="active"] { animation: hx-v-in-next 0.62s var(--m-major) 0.1s both; }
+.hx-voice[data-moved][data-dir="prev"] .hx-qf[data-state="active"] { animation: hx-v-in-prev 0.62s var(--m-major) 0.1s both; }
+.hx-voice[data-moved] .hx-qf[data-state="leaving"] { z-index: 0; }
+.hx-voice[data-moved] .hx-qf[data-state="active"] { z-index: 1; }
+
+/* Controls */
+.hx-vnav { display: grid; gap: 1.5rem; margin-top: clamp(2.5rem, 5vw, 4rem); padding-top: 1.25rem; border-top: 1px solid var(--hair); }
+.hx-vnav__index { display: flex; align-items: flex-end; gap: clamp(0.5rem, 1.5vw, 1rem); margin: 0; padding: 0; list-style: none; }
+.hx-vnav__num { display: grid; gap: 0.7rem; padding: 0.6rem 0 0.35rem; border: 0; background: none; cursor: pointer; text-align: left; color: var(--fg-dim); transition: color 0.4s var(--m-soft); }
+.hx-vnav__num .hx-label { color: inherit; font-variant-numeric: tabular-nums; }
+.hx-vnav__num:hover, .hx-vnav__num[aria-current] { color: var(--fg); }
+.hx-vnav__num[aria-current] .hx-label { color: var(--acc); }
+.hx-vnav__bar { display: block; width: 2.25rem; height: 1px; background: var(--hair); transition: width 0.55s var(--m-major), background-color 0.4s var(--m-soft); }
+.hx-vnav__num:hover .hx-vnav__bar { background: var(--fg-dim); }
+.hx-vnav__num[aria-current] .hx-vnav__bar { width: clamp(4.5rem, 3rem + 8vw, 8rem); background: var(--acc); }
+.hx-vnav__count { margin-left: auto; align-self: flex-start; padding-top: 0.6rem; color: var(--fg-dim); font-variant-numeric: tabular-nums; }
+.hx-vnav__count i { font-style: normal; color: var(--fg-dim); opacity: 0.6; }
+
+.hx-vnav__step { display: flex; justify-content: space-between; gap: 1.5rem; }
+.hx-vnav__btn { position: relative; display: inline-flex; align-items: center; gap: 0.85rem; padding: 0.5rem 0 0.7rem; border: 0; background: none; cursor: pointer; color: var(--fg); transition: color 0.4s var(--m-soft), opacity 0.4s var(--m-soft); }
+.hx-vnav__btn .hx-label { color: inherit; transition: translate 0.45s var(--m-major); }
+.hx-vnav__btn svg { color: var(--acc); transition: translate 0.45s var(--m-major); }
+.hx-vnav__btn::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 1px; background: var(--acc); transform: scaleX(0.28); transform-origin: left; transition: transform 0.55s var(--m-major); }
+.hx-vnav__btn--next::after { transform-origin: right; }
+.hx-vnav__btn:hover::after, .hx-vnav__btn:focus-visible::after { transform: scaleX(1); }
+.hx-vnav__btn--next:hover svg { translate: 5px 0; }
+.hx-vnav__btn--prev:hover svg { translate: -5px 0; }
+.hx-vnav__btn--next:hover .hx-label { translate: -2px 0; }
+.hx-vnav__btn--prev:hover .hx-label { translate: 2px 0; }
+.hx-vnav__btn[aria-disabled="true"] { opacity: 0.32; cursor: default; }
+.hx-vnav__btn[aria-disabled="true"]::after { transform: scaleX(0); }
+.hx-vnav__btn[aria-disabled="true"] svg, .hx-vnav__btn[aria-disabled="true"] .hx-label { translate: none; }
+.hx-vnav :is(button):focus-visible { outline: 2px solid var(--acc); outline-offset: 4px; }
+
+@media (min-width: 768px) {
+  .hx-qf { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); padding-top: 2.25rem; row-gap: 0; align-items: start; }
+  .hx-qf__idx { display: block; grid-column: 1 / span 2; }
+  .hx-qf__body { grid-column: 3 / -1; }
+  .hx-qf__q { text-indent: -0.42em; }
+  .hx-qf__cap { margin-left: auto; width: min(100%, 30rem); }
+  .hx-vnav { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; }
+  .hx-vnav__index { grid-column: 1 / span 6; }
+  .hx-vnav__count { margin-left: 1.5rem; }
+  .hx-vnav__step { grid-column: 7 / -1; justify-content: flex-end; gap: clamp(2rem, 5vw, 4rem); }
+}
+@media (min-width: 1100px) {
+  .hx-qf__idx { grid-column: 1 / span 3; }
+  .hx-qf__body { grid-column: 4 / span 9; }
+  .hx-qf__q { max-width: 19em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hx-voice .hx-qf { animation: none !important; }
+  .hx-qf[data-state="leaving"] { visibility: hidden; }
+  .hx-vnav *, .hx-vnav *::after { transition: none !important; }
+}
+
+
+/* ═════════ 09 FAQ ═════════ */
+
+/* ═════════ 10 CTA — a quiet closing statement ═════════ */
+.hx-cta { min-height: min(84svh, 54rem); }
+.hx-cta__title { font-size: clamp(2.75rem, 0.8rem + 8.6vw, 9rem); }
+.hx-cta__light { animation: none; opacity: calc(0.2 + var(--ap, 1) * 0.8); translate: -50% calc(62% - var(--ap, 1) * 10%); }
+.hx-geo--cta { opacity: calc(0.35 + var(--ap, 1) * 0.65); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hx-stagei__n, .hx-stagei__t, .hx-stagei__b, .hx-stagei__rule i, .hx-stagei__rule::before { transition: none; }
+  .js .hx-flow:not(.is-in) :is(.hx-stagei__n, .hx-stagei__t, .hx-stagei__b) { opacity: 1; translate: none; }
+  .js .hx-flow:not(.is-in) .hx-stagei__rule i { transform: none; }
+  .js .hx-flow:not(.is-in) .hx-stagei__rule::before { opacity: 1; }
+  .hx-cta__light { translate: -50% 52%; opacity: 1; }
+  .hx-geo--cta { opacity: 1; }
+}
+
+/* FAQ → CTA: no dead zone; the close begins close beneath the last line of the index */
+.hx-faqsec + .hx-cta { min-height: 0; padding-top: calc(var(--section-y) * 0.55); padding-bottom: clamp(4rem, 3rem + 5vw, 8rem); }

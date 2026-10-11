@@ -1,0 +1,88 @@
+/* ═════════ INTRO — "the axis" ═════════
+   One vertical axis through the section and through the corridor image's vanishing point.
+   --ip (0..1, written by HomeMotion) opens the image from the axis, parts the statement, travels the node. */
+.hx-sec.hx-intro[data-tone="royal"] {
+  --hero-white: #eef5f8; --hero-muted: #8593a0; --hero-soft: #c3d1da; --hero-cyan: #39c8ff;
+  --fg: var(--hero-white); --fg-dim: var(--hero-muted);
+  --i-line: rgb(255 255 255 / 0.12);
+  --bg: radial-gradient(60rem 22rem at 50% 38%, rgb(20 90 200 / 0.12), transparent 70%), linear-gradient(180deg, #040c11 0%, #061220 45%, #07162a 100%);
+  padding-block: clamp(3rem, 2rem + 3vw, 5.5rem) clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+  overflow-x: clip;
+  z-index: 2;
+}
+.js .hx-intro { --ip: 0; }
+.hx-intro { --ip: 1; }
+
+/* ── The axis ── */
+.hx-intro__axis { position: absolute; z-index: 1; inset: 0 auto 0 50%; width: 1px; translate: -0.5px 0; pointer-events: none; background: linear-gradient(180deg, transparent 0, rgb(57 200 255 / 0.35) 6rem, rgb(255 255 255 / 0.16) 60%, rgb(57 200 255 / 0.5) 100%); }
+.hx-intro__axis i { position: absolute; left: 50%; top: calc(var(--ip) * 100%); width: 5px; height: 5px; translate: -50% -50%; border-radius: 50%; background: var(--hero-cyan); box-shadow: 0 0 8px rgb(57 200 255 / 0.8); }
+
+/* ── Meta: quiet ── */
+.hx-intro__meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1.5rem; padding-bottom: 1.1rem; margin-bottom: clamp(1.5rem, 3vw, 2.5rem); border-bottom: 1px solid var(--i-line); }
+.hx-intro .hx-slabel { margin: 0; }
+.hx-intro .hx-slabel__idx { color: var(--hero-cyan); letter-spacing: 0.22em; }
+.hx-intro .hx-slabel > span:last-child { color: var(--hero-soft); letter-spacing: 0.22em; }
+.hx-intro__since { letter-spacing: 0.22em; color: var(--hero-muted); }
+
+/* ── Stage: image field and statement share one grid cell ── */
+.hx-intro__stage { position: relative; display: grid; min-height: clamp(30rem, 78vw, 40rem); }
+.hx-intro__fig, .hx-intro__over { grid-area: 1 / 1; }
+.hx-intro__fig { position: relative; margin: 0; overflow: hidden; background: #040a10;
+  clip-path: inset(0 calc((1 - var(--ip)) * 40%) 0 calc((1 - var(--ip)) * 40%));
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 18%, #000 70%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 18%, #000 70%, transparent 100%); }
+/* the vanishing point (31% across the source) is placed on the centre axis */
+.hx-intro__img { position: absolute; top: 48%; left: 50%; width: max(172%, 60rem); height: auto; max-width: none; aspect-ratio: 2 / 1; translate: -31% -47%; scale: calc(1.12 - var(--ip) * 0.12); transform-origin: 31% 47%; filter: saturate(1.1) brightness(0.9); }
+
+.hx-intro__over { position: relative; z-index: 2; align-self: end; display: grid; padding-bottom: clamp(1.5rem, 4vw, 3rem); pointer-events: none; }
+.hx-intro__over > * { pointer-events: auto; }
+.hx-intro__title { margin: 0; font-size: clamp(2.35rem, 11.4vw, 4.75rem); font-weight: 300; letter-spacing: -0.04em; line-height: 1.02; color: var(--hero-white); max-width: none; }
+.hx-intro__title .line { white-space: nowrap; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+.hx-intro__title .line:not(:last-child) .line__in { color: rgb(238 245 248 / 0.62); }
+.hx-intro__title .line:last-child { font-weight: 400; }
+.hx-intro__lead { margin: clamp(1.25rem, 3vw, 2rem) 0 0; max-width: 30rem; font-size: 1rem; font-weight: 300; line-height: 1.65; color: var(--hero-soft); }
+
+/* ── Beliefs: stepped down the axis ── */
+.hx-intro__beliefs { list-style: none; margin: clamp(2rem, 5vw, 3.5rem) 0 0; padding: 0; }
+.hx-intro__beliefs li { position: relative; display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); align-items: baseline; padding: clamp(1rem, 2.4vw, 1.6rem) 0; border-top: 1px solid var(--i-line); }
+.hx-intro__beliefs li:last-child { border-bottom: 1px solid var(--i-line); }
+.hx-intro__bn { font: 500 0.68rem/1.4 var(--font-mono); letter-spacing: 0.2em; color: var(--hero-cyan); }
+.hx-intro__bt { font-size: clamp(1.5rem, 1rem + 2.4vw, 2.75rem); font-weight: 300; letter-spacing: -0.03em; line-height: 1.15; color: rgb(238 245 248 / 0.78); transition: color 0.4s var(--m-soft), translate 0.6s var(--m-major); }
+.hx-intro__beliefs li:hover .hx-intro__bt { color: var(--hero-white); translate: 6px 0; }
+
+.hx-intro__cta { margin-top: clamp(1.25rem, 3vw, 2rem); }
+.hx-intro .hx-arrowlink { color: var(--hero-soft); }
+.hx-intro .hx-arrowlink::before { background: var(--i-line); }
+.hx-intro .hx-arrowlink::after { background: linear-gradient(90deg, var(--hero-cyan), rgb(57 200 255 / 0.2)); }
+.hx-intro .hx-arrowlink:hover { color: var(--hero-white); }
+.hx-intro .hx-arrowlink svg { color: var(--hero-cyan); }
+.hx-intro .hx-arrowlink:hover .hx-arrowlink__t { translate: 3px 0; }
+.hx-intro .hx-arrowlink__t { transition: translate 0.5s var(--m-major); }
+.hx-intro .hx-arrowlink:focus-visible { outline: 2px solid var(--hero-cyan); outline-offset: 4px; }
+
+/* ── Desktop: the statement parts around the axis; beliefs step across it ── */
+@media (min-width: 1024px) {
+  .hx-intro__stage { min-height: clamp(30rem, 56vh, 40rem); }
+  .hx-intro__over { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; }
+  .hx-intro__title { grid-column: 1 / span 9; font-size: clamp(4rem, 0.8rem + 6.4vw, 8.25rem); }
+  .hx-intro__title .line { translate: calc((1 - var(--ip)) * -5vw) 0; }
+  .hx-intro__title .line:nth-child(2) { translate: calc((1 - var(--ip)) * 4vw) 0; }
+  .hx-intro__title .line:nth-child(3) { translate: calc((1 - var(--ip)) * -3vw) 0; }
+  .hx-intro__title .line:nth-child(2) { margin-left: 0.9em; }
+  .hx-intro__title .line:nth-child(3) { margin-left: 1.8em; }
+  .hx-intro__lead { grid-column: 10 / -1; grid-row: 1; margin: 0 0 0.6rem; max-width: 20rem; font-size: 0.9375rem; }
+  .hx-intro__beliefs li { grid-template-columns: 3rem minmax(0, 1fr); }
+  .hx-intro__beliefs li:nth-child(2) .hx-intro__bt { margin-left: 16.66%; }
+  .hx-intro__beliefs li:nth-child(3) .hx-intro__bt { margin-left: 33.33%; }
+}
+
+/* ── Motion ── */
+.hx-intro__title .line__in { transition: transform 1.2s var(--m-major) var(--d, 0s), opacity 0.9s var(--m-soft) var(--d, 0s); }
+.js .hx-intro__title[data-reveal="lines"]:not(.is-in) .line__in { transform: translateY(24%); opacity: 0; }
+.js .hx-intro__fig[data-reveal="fade"]:not(.is-in) { opacity: 0; }
+.hx-intro__fig[data-reveal="fade"] { transition: opacity 1.2s var(--m-soft); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hx-intro { --ip: 1 !important; }
+  .hx-intro *, .hx-intro { transition: none !important; }
+  .js .hx-intro [data-reveal]:not(.is-in), .js .hx-intro [data-reveal]:not(.is-in) * { opacity: 1 !important; translate: none !important; transform: none !important; }
+}

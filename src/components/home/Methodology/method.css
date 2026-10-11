@@ -1,0 +1,98 @@
+/* ═════════ 06 METHOD — one architectural line ═════════
+   Desktop (≥1100px, tall enough, motion allowed): the stage pins and scroll writes --f (0 … n-1) and --e (0 … 1, the closing line).
+   Everything else is derived from --f in CSS, so the choreography is one continuous scrub, not a set of triggers.
+   Everywhere else: a vertical rail with the same stages; --mp fills the rail, [data-state] marks the current stage. */
+
+.hx-method { --bg: linear-gradient(180deg, var(--s-d) 0%, var(--s-c) 100%); padding-block: 0; }
+.hx-m-track { padding-block: var(--section-y); }
+.hx-m-head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.hx-m-head .hx-slabel { margin-bottom: clamp(1.25rem, 2.5vw, 2rem); }
+.hx-m-title { font-size: clamp(2.1rem, 1rem + 3.6vw, 4.5rem); }
+
+/* ───────── List mode: rail + ruled stages ───────── */
+.hx-m-stages { --rail: 0.3rem; position: relative; list-style: none; margin: 0; padding: 0; }
+.hx-m-stages::before, .hx-m-stages::after { content: ""; position: absolute; left: var(--rail); top: 0.55rem; bottom: 0.55rem; width: 1px; }
+.hx-m-stages::before { background: var(--hair); }
+.hx-m-stages::after { background: linear-gradient(180deg, #39c8ff, rgb(57 200 255 / 0.45)); transform-origin: top; scale: 1 var(--mp, 1); }
+.hx-m-panel { position: relative; display: grid; row-gap: 0.65rem; padding: 0 0 clamp(2rem, 6vw, 3rem) clamp(1.75rem, 6vw, 2.5rem); }
+.hx-m-panel:last-child { padding-bottom: 0; }
+.hx-m-panel::before { content: ""; position: absolute; left: var(--rail); top: 0.35rem; width: 7px; height: 7px; translate: -50% 0; border-radius: 50%; background: var(--s-c); border: 1px solid var(--hair-strong); transition: background-color 0.5s var(--m-soft), border-color 0.5s var(--m-soft), box-shadow 0.6s var(--m-soft); }
+.hx-m-panel__meta { color: var(--fg-dim); letter-spacing: 0.2em; transition: color 0.5s var(--m-soft); }
+.hx-m-panel__meta i { padding-inline: 0.25em; }
+.hx-m-panel__t { margin: 0; font-size: clamp(2rem, 1.5rem + 2.6vw, 3.25rem); font-weight: 300; letter-spacing: -0.04em; line-height: 1.04; color: var(--fg-soft); transition: color 0.5s var(--m-soft); }
+.hx-m-panel__b { margin: 0; max-width: 40ch; font-size: 0.9375rem; line-height: 1.65; font-weight: 300; color: var(--fg-dim); transition: color 0.5s var(--m-soft); }
+.hx-m-panel[data-state="on"]::before { background: #39c8ff; border-color: #39c8ff; box-shadow: 0 0 0 4px rgb(57 200 255 / 0.16); }
+.hx-m-panel[data-state="past"]::before { background: #39c8ff; border-color: #39c8ff; }
+.hx-m-panel[data-state="on"] .hx-m-panel__t { color: var(--fg); }
+.hx-m-panel[data-state="on"] .hx-m-panel__meta { color: #39c8ff; }
+.hx-m-panel[data-state="on"] .hx-m-panel__b { color: var(--fg-soft); }
+.hx-m-path, .hx-m-grid { display: none; }
+
+@media (min-width: 700px) {
+  .hx-m-panel { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(1.5rem, 4vw, 4rem); align-items: start; padding-bottom: clamp(2.25rem, 4vw, 3rem); }
+  .hx-m-panel__meta { grid-column: 1 / -1; }
+  .hx-m-panel__b { padding-top: 0.6em; }
+}
+
+/* Entrance reveals (list mode only; the pinned stage is driven by --f instead) */
+@media not ((min-width: 1100px) and (min-height: 620px) and (prefers-reduced-motion: no-preference)) {
+  .hx-m-panel { transition: opacity 0.9s var(--m-soft), translate 1.1s var(--m-major); }
+  .js .hx-m-panel:not(.is-in) { opacity: 0; translate: 0 14px; }
+}
+
+/* ───────── Pinned mode ───────── */
+@media (min-width: 1100px) and (min-height: 620px) and (prefers-reduced-motion: no-preference) {
+  .js .hx-method { --f: 0; --e: 0; }
+  .js .hx-m-track { height: calc(100svh + (var(--n) - 1) * 62svh); padding-block: 0; }
+  .js .hx-m-pin { position: sticky; top: 0; height: 100svh; overflow: clip; }
+  .js .hx-m-frame { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; padding-top: calc(var(--header-h) + clamp(0.5rem, 3svh, 2.5rem)); padding-bottom: clamp(1.25rem, 5svh, 3.5rem); }
+  .js .hx-m-head { margin-bottom: 0; }
+  .js .hx-m-head .hx-slabel { margin-bottom: clamp(0.9rem, 2.4svh, 1.5rem); }
+  .js .hx-m-title { font-size: clamp(2rem, 0.8rem + 2.6vw, 3.5rem); }
+  .js .hx-m-title .line:last-child .line__in { color: var(--fg); }
+  .js .hx-m-stages::before, .js .hx-m-stages::after, .js .hx-m-panel::before { display: none; }
+  .js .hx-m-rail { display: none; }
+
+  /* Drafting grid behind the stage: opens slightly as the system advances and is most present at Design */
+  .js .hx-m-grid { display: block; position: absolute; inset: 0; z-index: 0; pointer-events: none; transform-origin: 70% 40%;
+    scale: calc(1 + var(--f) * 0.014);
+    opacity: calc(0.3 + 0.7 * clamp(0, 1 - max(var(--f) - 2, 2 - var(--f)) / 2.6, 1));
+    background:
+      repeating-linear-gradient(90deg, rgb(64 156 255 / 0.07) 0 1px, transparent 1px calc(100% / 12)),
+      repeating-linear-gradient(0deg, rgb(64 156 255 / 0.05) 0 1px, transparent 1px 9svh);
+    -webkit-mask-image: radial-gradient(ellipse 62% 58% at 68% 42%, #000 0%, transparent 78%);
+    mask-image: radial-gradient(ellipse 62% 58% at 68% 42%, #000 0%, transparent 78%); }
+
+  /* Stages: one grid cell, cross-faded by distance from the current position */
+  .js .hx-m-stages { display: grid; align-items: end; padding-bottom: clamp(1.25rem, 4svh, 2.5rem); }
+  .js .hx-m-panel { --t: calc(var(--f) - var(--i)); --a: max(var(--t), calc(var(--t) * -1));
+    grid-area: 1 / 1; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: 0; padding: 0; align-items: end; pointer-events: none;
+    opacity: clamp(0, calc(1.4 - var(--a) * 2.6), 1); transition: none; translate: none; }
+  .js .hx-m-panel[data-state="on"] { pointer-events: auto; }
+  .js .hx-m-panel__meta { grid-column: 1 / -1; margin-bottom: clamp(0.5rem, 1.6svh, 1.1rem); color: #39c8ff; transition: none; }
+  .js .hx-m-panel__t { grid-column: 1 / span 8; font-size: clamp(4rem, min(2rem + 8.2vw, 19svh), 11rem); font-weight: 300; letter-spacing: -0.055em; line-height: 0.98; color: var(--fg); transition: none;
+    translate: calc(var(--t) * -4.5rem) 0; }
+  .js .hx-m-panel__t span { display: block; padding-bottom: 0.1em; clip-path: inset(-0.1em calc(clamp(0, var(--a) * 2.2, 1) * 100%) -0.1em 0); }
+  .js .hx-m-panel__b { grid-column: 9 / span 4; max-width: 34ch; padding-bottom: 0.9em; font-size: 1.0625rem; color: var(--fg-soft); transition: none;
+    translate: calc(var(--t) * -2rem) 0; }
+
+  /* The path: a stepped line descending through every stage, one segment per stage */
+  .js .hx-m-path { display: block; position: relative; z-index: 1; --rh: clamp(1.5rem, 4.4svh, 2.6rem); height: calc((var(--n) - 1) * var(--rh) + 2.4rem); }
+  .hx-m-step { position: absolute; left: calc(var(--k) * 100% / var(--n)); top: calc(var(--k) * var(--rh)); width: calc(100% / var(--n)); height: var(--rh); --s: clamp(0, calc(var(--f) - var(--k)), 1); }
+  .hx-m-step__h, .hx-m-step__v { position: absolute; background: var(--hair); }
+  .hx-m-step__h { left: 0; top: 0; width: 100%; height: 1px; }
+  .hx-m-step__v { right: 0; top: 0; width: 1px; height: 100%; }
+  .hx-m-step__h i, .hx-m-step__v i { position: absolute; inset: 0; background: #39c8ff; }
+  .hx-m-step__h i { transform-origin: left; scale: clamp(0, calc(var(--s) * 2), 1) 1; }
+  .hx-m-step__v i { transform-origin: top; scale: 1 clamp(0, calc(var(--s) * 2 - 1), 1); }
+  .hx-m-step:last-child .hx-m-step__h i { scale: var(--e) 1; }
+  .hx-m-step:last-child .hx-m-step__h::after { content: ""; position: absolute; right: 0; top: -3.5px; width: 7px; height: 7px; border: solid #39c8ff; border-width: 1px 1px 0 0; rotate: 45deg; translate: -3px 0; opacity: var(--e); }
+  .hx-m-step__node { position: absolute; left: 0; top: 0; width: 7px; height: 7px; translate: -50% -50%; border-radius: 50%; background: var(--s-c); border: 1px solid var(--hair-strong); transition: background-color 0.5s var(--m-soft), border-color 0.5s var(--m-soft), box-shadow 0.6s var(--m-soft); }
+  .hx-m-step__name { position: absolute; left: 0; top: 0; padding-top: 0.85rem; white-space: nowrap; color: var(--fg-dim); transition: color 0.5s var(--m-soft); }
+  .hx-m-step__name b { font-weight: 500; margin-right: 0.8em; opacity: 0.6; }
+  .hx-m-step[data-state="past"] .hx-m-step__node { background: #39c8ff; border-color: #39c8ff; }
+  .hx-m-step[data-state="past"] .hx-m-step__name { color: var(--fg-soft); }
+  .hx-m-step[data-state="on"] .hx-m-step__node { background: #39c8ff; border-color: #39c8ff; box-shadow: 0 0 0 4px rgb(57 200 255 / 0.16); }
+  .hx-m-step[data-state="on"] .hx-m-step__name { color: var(--fg); }
+  .hx-m-step[data-state="on"] .hx-m-step__name b { color: #39c8ff; opacity: 1; }
+}
