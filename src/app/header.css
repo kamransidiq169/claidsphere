@@ -68,7 +68,7 @@
   display: inline-flex; align-items: center; gap: .85rem; min-height: 2.75rem; padding: 0 .25rem 0 .75rem; margin-right: -.25rem;
   background: none; border: 0; color: inherit; cursor: pointer;
 }
-.menu-toggle__label { display: grid; font-size: .6875rem; letter-spacing: .16em; text-align: right; }
+.menu-toggle__label { display: grid; font-size: var(--fs-micro); letter-spacing: .16em; text-align: right; }
 .menu-toggle__label > span { grid-area: 1 / 1; transition: opacity .3s var(--ease-out), transform .4s var(--ease-out); }
 .menu-toggle__label > span:last-child { opacity: 0; transform: translateY(.5em); }
 .menu-toggle[aria-expanded="true"] .menu-toggle__label > span:first-child { opacity: 0; transform: translateY(-.5em); }
@@ -136,7 +136,7 @@
 }
 .mobile-menu__list li:last-child { border-bottom: 0; }
 .mobile-menu__list li:last-child::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: rgb(255 255 255 / .12); }
-.mobile-menu__idx { color: rgb(238 241 246 / .4); font-size: .6875rem; align-self: start; padding-top: .55em; }
+.mobile-menu__idx { color: rgb(238 241 246 / .4); font-size: var(--fs-micro); align-self: start; padding-top: .55em; }
 .mobile-menu__arrow { align-self: center; color: rgb(238 241 246 / .35); transition: transform .4s var(--ease-out), color .3s var(--ease-out); }
 .mobile-menu__list a:hover .mobile-menu__arrow, .mobile-menu__list a:focus-visible .mobile-menu__arrow { transform: translate(3px, -3px); color: var(--accent); }
 .mobile-menu__list a[aria-current="page"] { color: var(--accent-text-dark); }
@@ -155,7 +155,7 @@
 .mobile-menu__cta:hover svg { transform: translate(2px, -2px); }
 .mobile-menu__cta:focus-visible { outline-color: #fff; outline-offset: 3px; }
 .mobile-menu__meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin: 0; padding-top: 1.25rem; border-top: 1px solid rgb(255 255 255 / .12); }
-.mobile-menu__meta dt { color: rgb(238 241 246 / .4); font-size: .625rem; margin-bottom: .35rem; }
+.mobile-menu__meta dt { color: rgb(238 241 246 / .4); font-size: var(--fs-micro); margin-bottom: .35rem; }
 .mobile-menu__meta dd { margin: 0; font-size: .9375rem; line-height: 1.4; overflow-wrap: anywhere; }
 .mobile-menu__meta a { display: inline-flex; align-items: center; min-height: 2.75rem; }
 @media (max-width: 23.75rem) { .mobile-menu__meta { grid-template-columns: 1fr; gap: .5rem; } }

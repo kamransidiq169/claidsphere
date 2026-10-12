@@ -54,7 +54,7 @@
 /* Attribution lockup: a CLIENT tag over the name, then role / organisation */
 .hx-qf__cap { display: grid; gap: 0.75rem; padding-top: 1.1rem; max-width: 30rem; position: relative; }
 .hx-qf__cap::before { content: ""; position: absolute; left: 0; top: 0; width: 3.5rem; height: 1px; background: var(--acc); }
-.hx-qf__tag { font: 500 0.6875rem/1 var(--font-mono); letter-spacing: 0.22em; text-transform: uppercase; color: var(--acc); }
+.hx-qf__tag { font: 500 var(--fs-micro)/1 var(--font-mono); letter-spacing: 0.22em; text-transform: uppercase; color: var(--acc); }
 .hx-qf__id { display: grid; gap: 0.35rem; font-style: normal; }
 .hx-qf__name { font: 500 0.8125rem/1.4 var(--font-mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg); }
 .hx-qf__meta { display: flex; flex-wrap: wrap; gap: 0.15rem 0.9rem; font-size: 0.9375rem; font-weight: 300; line-height: 1.5; color: var(--fg-dim); }

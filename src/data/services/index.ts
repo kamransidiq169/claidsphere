@@ -1,18 +1,18 @@
 import type { Service, MicrosoftProduct } from "../types";
 
-/** Services listed on the Services page. */
+/** Services listed on the Services page, in narrative order: cloud, AI, software, then advisory and growth. */
 export const services: Service[] = [
-  { slug: "web-design-development", title: "Web Design & Development", summary: "Websites designed and built around your business.", offerings: ["Custom website design", "E-commerce solutions", "Website maintenance and support"], pillar: "software" },
-  { slug: "digital-marketing", title: "Digital Marketing Solutions", summary: "Strategic digital marketing to reach and grow your audience.", offerings: ["Fundamentals of SEO", "Social media marketing", "Pay-Per-Click"], isNew: true },
-  { slug: "brand-strategy-identity", title: "Brand Strategy & Identity", summary: "Strategy and visual identity that make your brand clear.", offerings: ["Logo design", "Brand strategy", "Visual identity"] },
-  { slug: "data-analytics", title: "Data Analytics", summary: "Turning data into intelligence.", offerings: ["Data collection and management", "Data analysis", "Reporting and visualization"], pillar: "ai" },
-  { slug: "consulting", title: "Consulting Services", summary: "Advice across strategy, technology and operations.", offerings: ["Business strategy", "Technology consulting", "Operational improvement"] },
-  { slug: "mobile-app-development", title: "Mobile App Development", summary: "Apps designed, built and tested for real users.", offerings: ["Custom app design & development", "Cross-Platform solutions", "Usability testing"], pillar: "software" },
   { slug: "cloud-solutions", title: "Cloud Solutions", summary: "Our cloud solutions scale effortlessly to meet business demands.", offerings: ["Cloud migration and support", "Microsoft Azure", "Microsoft 365"], pillar: "cloud" },
   { slug: "artificial-intelligence", title: "Artificial Intelligence", summary: "Our AI-powered tools seamlessly integrate to enhance decision-making.", offerings: ["Microsoft Copilot", "AI-powered solutions"], pillar: "ai" },
   { slug: "software-development", title: "Software Development", summary: "Our skilled developers build tailored solutions to accelerate growth.", offerings: ["Custom, tailored solutions"], pillar: "software" },
+  { slug: "data-analytics", title: "Data Analytics", summary: "Turning data into intelligence.", offerings: ["Data collection and management", "Data analysis", "Reporting and visualization"], pillar: "ai" },
+  { slug: "web-design-development", title: "Web Design & Development", summary: "Websites designed and built around your business.", offerings: ["Custom website design", "E-commerce solutions", "Website maintenance and support"], pillar: "software" },
+  { slug: "mobile-app-development", title: "Mobile App Development", summary: "Apps designed, built and tested for real users.", offerings: ["Custom app design & development", "Cross-Platform solutions", "Usability testing"], pillar: "software" },
   { slug: "quality-assurance", title: "Quality Assurance", summary: "From functional testing to performance testing.", offerings: ["Functional testing", "Performance testing"], pillar: "software" },
   { slug: "maintenance-support", title: "Maintenance & Support", summary: "Keep your software running smoothly.", offerings: ["Software maintenance", "Ongoing support"], pillar: "software" },
+  { slug: "consulting", title: "Consulting Services", summary: "Advice across strategy, technology and operations.", offerings: ["Business strategy", "Technology consulting", "Operational improvement"] },
+  { slug: "digital-marketing", title: "Digital Marketing Solutions", summary: "Strategic digital marketing to reach and grow your audience.", offerings: ["Fundamentals of SEO", "Social media marketing", "Pay-Per-Click"], isNew: true },
+  { slug: "brand-strategy-identity", title: "Brand Strategy & Identity", summary: "Strategy and visual identity that make your brand clear.", offerings: ["Logo design", "Brand strategy", "Visual identity"] },
 ];
 
 export const pillars = [

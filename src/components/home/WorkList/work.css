@@ -41,7 +41,7 @@
 .hx-wk__case[data-variant="quiet"] .hx-wk__media { aspect-ratio: 5 / 4; }
 .hx-wk__media .hx-img__plane > * { transition: transform 1.4s var(--m-major); }
 .hx-wk__svg { width: 100%; height: 100%; display: block; }
-.hx-wk__fig { position: absolute; z-index: 3; left: var(--gutter); bottom: 1rem; font-size: 0.66rem; letter-spacing: 0.18em; color: rgb(238 245 248 / 0.7); }
+.hx-wk__fig { position: absolute; z-index: 3; left: var(--gutter); bottom: 1rem; font-size: var(--fs-micro); letter-spacing: 0.18em; color: rgb(238 245 248 / 0.7); }
 /* Lead settles from 1.06; quiet wipes in from the left. Different choreography, same easing. */
 .hx-wk__media[data-reveal="clip"] { transition: clip-path 1.6s var(--m-major) var(--d, 0s); }
 .js .hx-wk__media[data-reveal="clip"]:not(.is-in) { clip-path: inset(0 0 100% 0); }

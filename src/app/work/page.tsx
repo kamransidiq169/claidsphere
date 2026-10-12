@@ -1,8 +1,7 @@
 import { SiteShell } from "@/components/layout/SiteShell";
-import { PageHero } from "@/components/sections/PageHero";
-import { WorkList } from "@/components/sections/WorkList";
-import { Testimonials } from "@/components/sections/Testimonials";
-import { CtaBand } from "@/components/sections/CtaBand";
+import { WorkHero, WorkCases, WorkBridge } from "@/components/work/WorkPage";
+import { CtaBand } from "@/components/home/CtaBand";
+import { HomeMotion } from "@/components/home/primitives/HomeMotion";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = pageMetadata({
@@ -14,10 +13,11 @@ export const metadata = pageMetadata({
 export default function WorkPage() {
   return (
     <SiteShell>
-      <PageHero eyebrow="Work" lines={["What we've", "built."]} lead="Selected projects, in the words of the clients they were built for." />
-      <WorkList heading={false} />
-      <Testimonials />
+      <WorkHero />
+      <WorkCases />
+      <WorkBridge />
       <CtaBand />
+      <HomeMotion />
     </SiteShell>
   );
 }

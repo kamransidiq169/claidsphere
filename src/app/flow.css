@@ -64,7 +64,7 @@
 .hx-pil__tick { position: absolute; z-index: 3; width: 14px; height: 14px; border: 0 solid var(--acc); opacity: 0.85; pointer-events: none; }
 .hx-pil__tick--tl { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
 .hx-pil__tick--tr { top: 10px; right: 10px; border-width: 1px 1px 0 0; }
-.hx-pil__cap { position: absolute; z-index: 3; left: 1.25rem; bottom: 1rem; display: flex; gap: 1rem; font-size: 0.66rem; letter-spacing: 0.18em; color: rgb(238 245 248 / 0.75); }
+.hx-pil__cap { position: absolute; z-index: 3; left: 1.25rem; bottom: 1rem; display: flex; gap: 1rem; font-size: var(--fs-micro); letter-spacing: 0.18em; color: rgb(238 245 248 / 0.75); }
 .hx-pil__cap span:first-child { color: var(--acc); }
 
 /* Index: ruled rows; the open row brightens, its rule draws, its detail unfolds */
@@ -155,7 +155,7 @@
 .hx-fig__tick { position: absolute; width: 14px; height: 14px; border: 0 solid #39c8ff; opacity: 0.85; }
 .hx-fig__tick--tl { top: 8px; left: 8px; border-width: 1px 0 0 1px; }
 .hx-fig__tick--tr { top: 8px; right: 8px; border-width: 1px 1px 0 0; }
-.hx-fig__cap { display: flex; gap: 1rem; margin: 0 0 1.25rem; padding: 0.15rem 0.5rem 0; font-size: 0.66rem; letter-spacing: 0.18em; color: rgb(238 245 248 / 0.7); }
+.hx-fig__cap { display: flex; gap: 1rem; margin: 0 0 1.25rem; padding: 0.15rem 0.5rem 0; font-size: var(--fs-micro); letter-spacing: 0.18em; color: rgb(238 245 248 / 0.7); }
 .hx-fig__cap span:first-child { color: #39c8ff; }
 .hx-fig__boundary { --gap: 1.25rem; position: relative; display: grid; gap: var(--gap); padding: 2.75rem clamp(0.9rem, 2vw, 1.5rem) clamp(0.9rem, 2vw, 1.5rem); border: 1px dashed rgb(57 200 255 / 0.3);
   grid-template-columns: 1fr 1fr; grid-template-areas: "support support" "m365 m365" "azure azure" "security licensing"; }

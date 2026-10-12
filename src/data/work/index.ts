@@ -8,6 +8,8 @@ export const caseStudies: CaseStudy[] = [
     year: "2025",
     service: "Website development",
     summary: "The website received positive feedback for its functionality and user experience, helping the client reach a wider audience.",
+    serviceSlug: "web-design-development",
+    testimonialOrg: "Yaseen Stone Crusher",
     outcome: "Positive feedback on functionality and user experience; reached a wider audience.",
   },
   {
@@ -16,5 +18,7 @@ export const caseStudies: CaseStudy[] = [
     year: "2025",
     service: "Brand identity development",
     summary: "A software and app landing page for software and app marketing businesses.",
+    serviceSlug: "brand-strategy-identity",
+    testimonialOrg: "JKAS",
   },
 ];

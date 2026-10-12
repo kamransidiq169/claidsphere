@@ -25,7 +25,7 @@
 /* ── type primitives ── */
 .ft__h { margin: 0 0 clamp(1.1rem, 1rem + .6vw, 1.6rem); display: flex; align-items: baseline; gap: .9rem; font: 500 .72rem/1.4 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--fg-dim); }
 .ft__h span { color: var(--accent); letter-spacing: .12em; }
-.ft__meta { display: block; font: 500 .68rem/1.4 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--fg-dim); }
+.ft__meta { display: block; font: 500 var(--fs-micro)/1.4 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--fg-dim); }
 
 /* ── 01 closing statement ── */
 .ft__close { display: grid; row-gap: clamp(1.75rem, 1.2rem + 2vw, 3rem); align-items: end; }

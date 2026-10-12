@@ -41,11 +41,16 @@
 .hx-intro__title .line:last-child { font-weight: 400; }
 .hx-intro__lead { margin: clamp(1.25rem, 3vw, 2rem) 0 0; max-width: 30rem; font-size: 1rem; font-weight: 300; line-height: 1.65; color: var(--hero-soft); }
 
+/* Below the desktop composition the statement sits over the lit part of the corridor: a scrim keeps it legible */
+@media (max-width: 63.99rem) {
+  .hx-intro__over::before { content: ""; position: absolute; z-index: -1; inset: -40% calc(var(--gutter) * -1) -1.5rem; pointer-events: none; background: linear-gradient(180deg, transparent 0, rgb(4 12 17 / 0.72) 38%, rgb(4 12 17 / 0.72) 78%, transparent 100%); }
+}
+
 /* ── Beliefs: stepped down the axis ── */
 .hx-intro__beliefs { list-style: none; margin: clamp(2rem, 5vw, 3.5rem) 0 0; padding: 0; }
 .hx-intro__beliefs li { position: relative; display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); align-items: baseline; padding: clamp(1rem, 2.4vw, 1.6rem) 0; border-top: 1px solid var(--i-line); }
 .hx-intro__beliefs li:last-child { border-bottom: 1px solid var(--i-line); }
-.hx-intro__bn { font: 500 0.68rem/1.4 var(--font-mono); letter-spacing: 0.2em; color: var(--hero-cyan); }
+.hx-intro__bn { font: 500 var(--fs-micro)/1.4 var(--font-mono); letter-spacing: 0.2em; color: var(--hero-cyan); }
 .hx-intro__bt { font-size: clamp(1.5rem, 1rem + 2.4vw, 2.75rem); font-weight: 300; letter-spacing: -0.03em; line-height: 1.15; color: rgb(238 245 248 / 0.78); transition: color 0.4s var(--m-soft), translate 0.6s var(--m-major); }
 .hx-intro__beliefs li:hover .hx-intro__bt { color: var(--hero-white); translate: 6px 0; }
 

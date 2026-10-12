@@ -17,7 +17,7 @@ const N = methodology.length;
  */
 export function Methodology() {
   return (
-    <Band tone="flow" labelledBy="method-title" className="hx-method" bare style={{ "--n": N, "--f": 0 } as CSSProperties} backdrop={<Geo cx={1500} cy={250} r={640} from={180} to={203} />}>
+    <Band tone="flow" id="methodology" labelledBy="method-title" className="hx-method" bare style={{ "--n": N, "--f": 0 } as CSSProperties} backdrop={<Geo cx={1500} cy={250} r={640} from={180} to={203} />}>
       <div className="hx-m-track">
         <div className="hx-m-pin">
           <div className="hx-m-grid" aria-hidden="true" />

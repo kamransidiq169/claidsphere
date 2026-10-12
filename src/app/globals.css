@@ -49,6 +49,10 @@
   --fs-body: 1rem;
   --fs-small: 0.875rem;
   --fs-label: 0.78rem;
+  /* Floor for mono metadata: nothing on the site is set smaller than this */
+  --fs-micro: 0.72rem;
+  /* Minimum comfortable touch target */
+  --tap: 2.75rem;
 
   /* Layout */
   --container: 100rem;
@@ -211,3 +215,16 @@ a { color: inherit; text-decoration: none; }
 [data-theme="light"] + .section[data-theme="dark"],
 [data-theme="light"] + .section[data-theme="graphite"] { --prev: var(--paper-50); }
 [data-theme="graphite"] + .section[data-theme="dark"] { --prev: var(--ink-800); }
+
+/* ───────── Touch ergonomics ─────────
+   Visual size stays editorial; the hit area is extended with an invisible pseudo-element so small inline links remain easy to tap. */
+.logo { min-height: var(--tap); }
+.linkline, .btn--text, .ft__big { position: relative; }
+.linkline::before, .btn--text::before, .ft__big::before { content: ""; position: absolute; inset: -0.7rem -0.35rem; }
+.hx-vnav__btn, .hx-vnav__num { min-height: var(--tap); }
+.hx-vnav__num { min-width: var(--tap); }
+
+/* Very narrow screens (<= 320px): a single long word may break rather than push the page wider */
+@media (max-width: 20rem) {
+  h1, h2, h3, .display { overflow-wrap: anywhere; }
+}

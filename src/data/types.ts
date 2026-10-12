@@ -21,6 +21,10 @@ export interface CaseStudy {
   year: string;
   service: string;
   summary: string;
+  /** Route slug of the matching service page, when one exists. */
+  serviceSlug?: string;
+  /** Organisation name as it appears on this client's testimonial. */
+  testimonialOrg?: string;
   /** Only facts stated on the source site; fields stay undefined when unsourced. */
   challenge?: string;
   solution?: string;
